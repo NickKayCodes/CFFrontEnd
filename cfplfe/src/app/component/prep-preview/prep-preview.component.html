@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <th>category</th>
+      <th>foodItem</th>
+      <th>process</th>      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td>{{ item.category }}</td>
+      <td>{{ item.foodItem }}</td>
+      <td>{{ item.process }}</td>
+    </tr>
+  </tbody>
+</table>

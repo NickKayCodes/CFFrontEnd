@@ -1,0 +1,35 @@
+<div *ngIf="hasParsedSheets(); else noSheets">
+  <label for="sheet-select">Select Sheet:</label>
+  <select [(ngModel)]="parsedSheetService.selectedSheet">
+    <option *ngFor="let name of parsedSheetService.sheetNames" [value]="name">
+      {{ name }}
+    </option>
+  </select>
+
+  <ng-container *ngIf="parsedSheetService.selectedSheet">
+    <ng-container
+      *ngIf="
+        parsedSheetService.parsedSheets[parsedSheetService.selectedSheet]
+          ?.type === 'prep'
+      "
+    >
+      <app-prep-preview *ngIf="prepData" [data]="prepData"></app-prep-preview>
+    </ng-container>
+
+    <ng-container
+      *ngIf="
+        parsedSheetService.parsedSheets[parsedSheetService.selectedSheet]
+          ?.type === 'event'
+      "
+    >
+      <app-event-preview
+        *ngIf="eventData"
+        [data]="eventData"
+      ></app-event-preview>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #noSheets>
+  <p class="text-muted">Upload an Excel file to begin previewing sheets.</p>
+</ng-template>

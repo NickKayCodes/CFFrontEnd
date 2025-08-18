@@ -1,0 +1,13 @@
+<div class="sheet-selector">
+  <label>Select Sheet:</label>
+  <select [(ngModel)]="selectedSheet">
+    <option *ngFor="let sheet of sheetNames" [value]="sheet">{{ sheet }}</option>
+  </select>
+</div>
+<!--<div *ngIf="isMasterSheet">
+  <app-prep-preview [items]="sheetMap[selectedSheet || '']"></app-prep-preview>
+</div>
+
+<div *ngIf="!isMasterSheet" >
+  <app-event-preview [items]="sheetMap[selectedSheet || '']"></app-event-preview>
+</div>-->

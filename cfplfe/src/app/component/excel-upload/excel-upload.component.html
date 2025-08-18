@@ -9,7 +9,7 @@
 
     <div *ngIf="fileName">
       <p>Selected file: {{ fileName }}</p>
-      <button (click)="uploadFile()">Upload</button>
+      <input type="file" (change)="onFileSelected($event)" />
     </div>
   </div>
 </div>
