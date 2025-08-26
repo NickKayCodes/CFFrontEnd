@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './event-preview.component.html',
-
+  styleUrls: ['./event-preview.component.scss'],
 })
 export class EventPreviewComponent {
   @Input() data: EventPrepDto[] = [];

@@ -7,9 +7,9 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './prep-preview.component.html',
-
+  styleUrls: ['./prep-preview.component.scss'],
 })
 export class PrepPreviewComponent {
   @Input() data: PrepItemDto[] = [];
-
+  
 }

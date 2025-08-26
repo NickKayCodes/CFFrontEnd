@@ -6,7 +6,6 @@ import { Router, RouterModule } from '@angular/router';
 import { PrepPreviewComponent } from '../prep-preview/prep-preview.component';
 import { EventPreviewComponent } from '../event-preview/event-preview.component';
 import { ParsedSheetService } from '../../service/parsed-sheet-service/parsed-sheet.service';
-import { ParsedSheet } from '../../model/ParsedSheet';
 import { PrepItemDto } from '../../model/PrepItemDto';
 import { EventPrepDto } from '../../model/EventPrepDto';
 
@@ -23,6 +22,8 @@ import { EventPrepDto } from '../../model/EventPrepDto';
     EventPreviewComponent,
   ],
   templateUrl: './excel-preview.component.html',
+  styleUrls: ['./excel-preview.component.scss'],
+
 })
 export class ExcelPreviewComponent implements OnInit {
   constructor(public parsedSheetService: ParsedSheetService, private router:Router) {}

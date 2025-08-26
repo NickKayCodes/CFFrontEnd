@@ -3,13 +3,14 @@
     <h3 style="color: red">Upload Excel File</h3>
     <input
       type="file"
+      id="SelectFile"
       (change)="onFileSelected($event)"
       accept=".xlsx, .xls, .csv"
     />
 
     <div *ngIf="fileName">
       <p>Selected file: {{ fileName }}</p>
-      <input type="file" (change)="onFileSelected($event)" />
+      <input  type="file" (change)="onFileSelected($event)" />
     </div>
   </div>
 </div>
