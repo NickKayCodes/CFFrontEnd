@@ -8,8 +8,7 @@ import { EventPreviewComponent } from '../event-preview/event-preview.component'
 import { ParsedSheetService } from '../../service/parsed-sheet-service/parsed-sheet.service';
 import { PrepItemDto } from '../../model/PrepItemDto';
 import { EventPrepDto } from '../../model/EventPrepDto';
-
-
+import { ExcelUploadService } from '../../service/excel-upload/excel-upload.service';
 
 @Component({
   selector: 'app-excel-preview',
@@ -23,18 +22,18 @@ import { EventPrepDto } from '../../model/EventPrepDto';
   ],
   templateUrl: './excel-preview.component.html',
   styleUrls: ['./excel-preview.component.scss'],
-
 })
 export class ExcelPreviewComponent implements OnInit {
-  constructor(public parsedSheetService: ParsedSheetService, private router:Router) {}
+  constructor(
+    public parsedSheetService: ParsedSheetService,
+    private router: Router,
+    private excelUploadService: ExcelUploadService
+  ) {}
 
   ngOnInit(): void {
     const sheets = this.parsedSheetService.parsedSheets;
     const selected = this.parsedSheetService.selectedSheet;
     this.parsedSheetService.sheetNames = Object.keys(sheets);
-
-    console.log('🔍 Sheets:', sheets);
-    console.log('📌 Selected:', selected);
 
     if (!sheets || Object.keys(sheets).length === 0) {
       console.warn('⚠️ No sheets found. Redirecting...');
@@ -48,11 +47,11 @@ export class ExcelPreviewComponent implements OnInit {
 
   get prepData(): PrepItemDto[] | null {
     const sheet = this.parsedSheetService.parsedSheets[this.selectedSheet!];
+    if (!sheet) {
+      return null;
+    }
 
     if (this.parsedSheetService.isPrepSheet(sheet)) {
-      console.log('prepitemdto');
-      console.log('🗒️ Previewing sheet:', this.selectedSheet);
-      console.log('📋 Sheet data:', sheet.data);
       return sheet.data;
     }
 
@@ -63,9 +62,6 @@ export class ExcelPreviewComponent implements OnInit {
     const sheet = this.parsedSheetService.parsedSheets[this.selectedSheet!];
 
     if (this.parsedSheetService.isEventSheet(sheet)) {
-      console.log('prepitemdto');
-      console.log('🗒️ Previewing sheet:', this.selectedSheet);
-      console.log('📋 Sheet data:', sheet.data);
       return sheet.data;
     }
 
@@ -74,5 +70,14 @@ export class ExcelPreviewComponent implements OnInit {
 
   hasParsedSheets(): boolean {
     return Object.keys(this.parsedSheetService.parsedSheets).length > 0;
+  }
+
+  selectedFile: File | null = null;
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
   }
 }

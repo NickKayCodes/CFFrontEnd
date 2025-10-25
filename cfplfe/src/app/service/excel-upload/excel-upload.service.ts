@@ -11,6 +11,9 @@ export class ExcelUploadService {
   uploadExcel(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post('/api/excel/upload', formData);
+    return this.http.post(
+      'http://localhost:32769/PrepList/upload-excel',
+      formData
+    );
   }
 }

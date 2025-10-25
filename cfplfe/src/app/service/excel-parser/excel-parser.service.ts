@@ -14,7 +14,6 @@ export class ExcelParserService {
   constructor() {}
 
   get sheetNames(): string[] {
-    console.log('📄 Available sheets:', Object.keys(this.parsedSheets));
     return Object.keys(this.parsedSheets);
   }
 
@@ -54,7 +53,6 @@ export class ExcelParserService {
       const parsed = parser(rawRows);
 
       sheetMap[sheetName] = { type, data: parsed };
-      console.log(`✅ Parsed "${sheetName}" as "${type}"`);
     });
 
     this.parsedSheets = sheetMap;

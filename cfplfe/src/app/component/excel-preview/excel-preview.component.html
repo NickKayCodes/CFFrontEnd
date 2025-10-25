@@ -1,11 +1,3 @@
-<div *ngIf="hasParsedSheets(); else noSheets">
-  <label for="sheet-select">Select Sheet:</label>
-  <select id="sheet-drop-down" [(ngModel)]="parsedSheetService.selectedSheet">
-    <option *ngFor="let name of parsedSheetService.sheetNames; let i = index" [value]="name" [attr.id]="name">
-      {{ name }}
-    </option>
-  </select>
-
   <div class="preview-shell">
     <ng-container *ngIf="parsedSheetService.selectedSheet">
       <ng-container
@@ -25,8 +17,3 @@
       </ng-container>
     </ng-container>
   </div>
-</div>
-
-<ng-template #noSheets>
-  <p class="text-muted">Upload an Excel file to begin previewing sheets.</p>
-</ng-template>
