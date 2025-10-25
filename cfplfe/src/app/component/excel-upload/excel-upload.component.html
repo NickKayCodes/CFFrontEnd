@@ -11,6 +11,7 @@
     <div *ngIf="fileName">
       <p>Selected file: {{ fileName }}</p>
       <button
+      class="btn btn-primary"
         id="upload-button"
         (click)="uploadFile()"
         [disabled]="!selectedFile"
