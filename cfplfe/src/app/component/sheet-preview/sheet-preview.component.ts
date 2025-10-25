@@ -7,10 +7,9 @@ import { PrepPreviewComponent } from '../prep-preview/prep-preview.component';
 
 
 @Component({
-  selector: 'app-sheet-preview',
-  standalone: true,
-  imports: [CommonModule, FormsModule,], // Add any necessary imports here, e.g. CommonModule
-  templateUrl: './sheet-preview.component.html',
+    selector: 'app-sheet-preview',
+    imports: [CommonModule, FormsModule,], // Add any necessary imports here, e.g. CommonModule
+    templateUrl: './sheet-preview.component.html'
 })
 export class SheetPreviewComponent {
   @Input() sheetMap: Record<string, any[]> = {};

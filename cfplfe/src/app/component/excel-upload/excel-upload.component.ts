@@ -10,11 +10,10 @@ import { ParsedSheetService } from '../../service/parsed-sheet-service/parsed-sh
 import { ExcelPreviewComponent } from '../excel-preview/excel-preview.component';
 
 @Component({
-  selector: 'app-excel-upload',
-  templateUrl: './excel-upload.component.html',
-  styleUrls: ['./excel-upload.component.scss'],
-  standalone: true,
-  imports: [CommonModule, ExcelPreviewComponent, FormsModule],
+    selector: 'app-excel-upload',
+    templateUrl: './excel-upload.component.html',
+    styleUrls: ['./excel-upload.component.scss'],
+    imports: [CommonModule, ExcelPreviewComponent, FormsModule]
 })
 export class ExcelUploadComponent {
   selectedFile: File | null = null;

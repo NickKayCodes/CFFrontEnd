@@ -11,17 +11,16 @@ import { EventPrepDto } from '../../model/EventPrepDto';
 import { ExcelUploadService } from '../../service/excel-upload/excel-upload.service';
 
 @Component({
-  selector: 'app-excel-preview',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    PrepPreviewComponent,
-    EventPreviewComponent,
-  ],
-  templateUrl: './excel-preview.component.html',
-  styleUrls: ['./excel-preview.component.scss'],
+    selector: 'app-excel-preview',
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterModule,
+        PrepPreviewComponent,
+        EventPreviewComponent,
+    ],
+    templateUrl: './excel-preview.component.html',
+    styleUrls: ['./excel-preview.component.scss']
 })
 export class ExcelPreviewComponent implements OnInit {
   constructor(
