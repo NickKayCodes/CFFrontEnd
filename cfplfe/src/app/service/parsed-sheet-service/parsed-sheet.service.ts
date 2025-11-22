@@ -3,7 +3,6 @@ import { ParsedSheet } from '../../model/ParsedSheet';
 import { PrepItemDto } from '../../model/PrepItemDto';
 import { EventPrepDto } from '../../model/EventPrepDto';
 
-
 @Injectable({ providedIn: 'root' })
 export class ParsedSheetService {
   parsedSheets: Record<string, ParsedSheet> = {};
@@ -26,4 +25,5 @@ export class ParsedSheetService {
   ): sheet is { type: 'event'; data: EventPrepDto[] } {
     return sheet?.type === 'event';
   }
+
 }

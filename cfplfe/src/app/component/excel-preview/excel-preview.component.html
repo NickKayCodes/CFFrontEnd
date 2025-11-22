@@ -13,7 +13,7 @@
           parsedSheetService.parsedSheets[parsedSheetService.selectedSheet]?.type === 'event'
         "
       >
-        <app-event-preview *ngIf="eventData" [data]="eventData"></app-event-preview>
+        <app-event-preview *ngIf="eventData" [data]="eventData" [metadata]="parsedSheetService.parsedSheets[parsedSheetService.selectedSheet]?.metadata"></app-event-preview>
       </ng-container>
     </ng-container>
   </div>

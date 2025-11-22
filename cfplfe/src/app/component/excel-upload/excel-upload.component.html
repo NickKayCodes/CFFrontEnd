@@ -1,17 +1,25 @@
 <div class="page-wrapper">
   <div class="upload-container">
     <h3 style="color: red">Upload Excel File</h3>
+
+    <button type="button" matFab extended (click)="fileInput.click()">
+      Choose File
+    </button>
     <input
-      type="file"
-      id="SelectFile"
+      hidden
       (change)="onFileSelected($event)"
       accept=".xlsx, .xls, .csv"
+      #fileInput
+      type="file"
+      id="select-file"
     />
 
     <div *ngIf="fileName">
       <p>Selected file: {{ fileName }}</p>
       <button
-      class="btn btn-primary"
+        matFab
+        extended
+        class="btn btn-primary"
         id="upload-button"
         (click)="uploadFile()"
         [disabled]="!selectedFile"
@@ -35,11 +43,30 @@
   <ng-template #noSheets>
     <p class="text-muted">Upload an Excel file to begin previewing sheets.</p>
   </ng-template>
-
   <div
     id="preview-section"
     *ngIf="parsedSheetService.selectedSheet && hasParsedSheets()"
   >
-    <app-excel-preview></app-excel-preview>
+    <h2>Preview Sheet Below</h2>
   </div>
+  <div
+    id="preview-section"
+    *ngIf="parsedSheetService.selectedSheet && hasParsedSheets()"
+  >
+    <app-excel-preview ></app-excel-preview>
+  </div>
+</div>
+<div
+  class="scroll-button-container"
+  id="preview-section"
+  *ngIf="parsedSheetService.selectedSheet && hasParsedSheets()"
+>
+  <button
+    matFab
+    class="scroll-button"
+    (click)="scrollToTop()"
+    title="Scroll to Bottom"
+  >
+    <mat-icon>arrow_upward</mat-icon>
+  </button>
 </div>

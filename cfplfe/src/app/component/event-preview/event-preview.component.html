@@ -1,30 +1,30 @@
-<table>
-  <thead>
-    <tr>
-        <th>Date</th>
-        <th>Venue</th>
-        <th>Event Title</th>
-        <th>Count</th>
+<div class="table_component" *ngIf="metadata">
+  <div class="event-header">
+    <label>Date: {{ metadata.date }}</label>
+    <label>Venue: {{ metadata.venue }}</label>
+    <label>Event Title: {{ metadata.eventTitle }}</label>
+    <label>Count: {{ metadata.count }}</label>
+  </div>
+  <table class="prep-list">
+    <thead>
+      <tr>
         <th>Assigned To</th>
         <th>Category</th>
         <th>Food Item</th>
         <th>Process</th>
         <th>Quantity</th>
         <th>Packout</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of data">
-      <td>{{ item.date }}</td>
-      <td>{{ item.venue }}</td>
-      <td>{{ item.eventTitle }}</td>
-      <td>{{ item.count }}</td>
-      <td>{{ item.assignedTo}}</td>
-      <td>{{ item.category }}</td>
-      <td>{{ item.foodItem }}</td>
-      <td>{{ item.process }}</td>
-      <td>{{ item.quantity }}</td>
-      <td>{{ item.packout }}</td>
-    </tr>
-  </tbody>
-</table>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td>{{ item.assignedTo || "" }}</td>
+        <td>{{ item.category || "" }}</td>
+        <td>{{ item.foodItem || "" }}</td>
+        <td>{{ item.process || "" }}</td>
+        <td>{{ item.quantity || "" }}</td>
+        <td>{{ item.packout || "" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

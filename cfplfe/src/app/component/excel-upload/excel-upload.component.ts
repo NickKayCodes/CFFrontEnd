@@ -1,4 +1,6 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { MatFabButton } from '@angular/material/button';
+
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ExcelUploadService } from '../../service/excel-upload/excel-upload.service';
@@ -8,12 +10,13 @@ import { ExcelParserService } from '../../service/excel-parser/excel-parser.serv
 import { Router } from '@angular/router';
 import { ParsedSheetService } from '../../service/parsed-sheet-service/parsed-sheet.service';
 import { ExcelPreviewComponent } from '../excel-preview/excel-preview.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
     selector: 'app-excel-upload',
     templateUrl: './excel-upload.component.html',
     styleUrls: ['./excel-upload.component.scss'],
-    imports: [CommonModule, ExcelPreviewComponent, FormsModule]
+    imports: [CommonModule, ExcelPreviewComponent, FormsModule, MatFabButton, MatIconModule]
 })
 export class ExcelUploadComponent {
   selectedFile: File | null = null;
@@ -40,6 +43,7 @@ export class ExcelUploadComponent {
       this.parsedSheetService.parsedSheets = sheetMap;
       this.parsedSheetService.sheetNames = sheetNames;
       this.parsedSheetService.selectedSheet = sheetNames[0]; // ✅ always valid
+      console.log('✅ File parsed successfully:', sheetMap);
     } catch (err) {
       console.error('❌ Failed to parse file:', err);
     }
@@ -114,5 +118,9 @@ export class ExcelUploadComponent {
         console.error('Upload failed:', err);
       },
     });
+  }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { PrepItemDto } from '../../model/PrepItemDto';
 import { EventPrepDto } from '../../model/EventPrepDto';
+import { EventMetaDataDto } from '../../model/EventMetaDataDto';
+import { ParsedSheet } from '../../model/ParsedSheet'; // ✅ use shared model
 
 type SheetType = 'prep' | 'event';
-type ParsedSheet = { type: SheetType; data: any[] };
 
 @Injectable({ providedIn: 'root' })
 export class ExcelParserService {
@@ -17,7 +18,7 @@ export class ExcelParserService {
     return Object.keys(this.parsedSheets);
   }
 
-  get selectedData(): any[] | null {
+  get selectedData(): PrepItemDto[] | EventPrepDto[] | null {
     if (!this.selectedSheet) return null;
     const sheet = this.parsedSheets[this.selectedSheet];
     return sheet?.data ?? null;
@@ -52,13 +53,20 @@ export class ExcelParserService {
       const parser = this.getParser(type);
       const parsed = parser(rawRows);
 
-      sheetMap[sheetName] = { type, data: parsed };
+      // ✅ Only extract metadata for event sheets
+      const metadata =
+        type === 'event' ? this.extractMetadata(rawRows) : undefined;
+
+      console.log(
+        `Excel parser service - Metadata for sheet "${sheetName}":`,
+        metadata
+      );
+
+      sheetMap[sheetName] = { type, data: parsed, metadata };
     });
 
     this.parsedSheets = sheetMap;
     this.selectedSheet = this.sheetNames[0] ?? null;
-    
-
     return sheetMap;
   }
 
@@ -127,5 +135,38 @@ export class ExcelParserService {
         return obj;
       }, {} as EventPrepDto)
     );
+  }
+
+  // Return EventMetaDataDto instead of Record<string, string>
+  private extractMetadata(rows: any[][]): EventMetaDataDto {
+    const metadata: Partial<EventMetaDataDto> = {};
+
+    for (const row of rows.slice(0, 5)) {
+      const [label, value] = row;
+      if (!label || !value) continue;
+
+      const key = String(label).trim().toLowerCase();
+      switch (key) {
+        case 'date':
+          metadata.date = String(value);
+          break;
+        case 'venue':
+          metadata.venue = String(value);
+          break;
+        case 'event title':
+          metadata.eventTitle = String(value);
+          break;
+        case 'count':
+          metadata.count = String(value);
+          break;
+      }
+    }
+
+    return {
+      date: metadata.date ?? '',
+      venue: metadata.venue ?? '',
+      eventTitle: metadata.eventTitle ?? '',
+      count: metadata.count ?? '',
+    };
   }
 }

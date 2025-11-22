@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-
 import { PrepPreviewComponent } from '../prep-preview/prep-preview.component';
 import { EventPreviewComponent } from '../event-preview/event-preview.component';
 import { ParsedSheetService } from '../../service/parsed-sheet-service/parsed-sheet.service';
@@ -11,16 +10,16 @@ import { EventPrepDto } from '../../model/EventPrepDto';
 import { ExcelUploadService } from '../../service/excel-upload/excel-upload.service';
 
 @Component({
-    selector: 'app-excel-preview',
-    imports: [
-        CommonModule,
-        FormsModule,
-        RouterModule,
-        PrepPreviewComponent,
-        EventPreviewComponent,
-    ],
-    templateUrl: './excel-preview.component.html',
-    styleUrls: ['./excel-preview.component.scss']
+  selector: 'app-excel-preview',
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    PrepPreviewComponent,
+    EventPreviewComponent,
+  ],
+  templateUrl: './excel-preview.component.html',
+  styleUrls: ['./excel-preview.component.scss'],
 })
 export class ExcelPreviewComponent implements OnInit {
   constructor(
@@ -61,6 +60,8 @@ export class ExcelPreviewComponent implements OnInit {
     const sheet = this.parsedSheetService.parsedSheets[this.selectedSheet!];
 
     if (this.parsedSheetService.isEventSheet(sheet)) {
+      
+      console.log('Event Sheet Data:', sheet.data);
       return sheet.data;
     }
 
@@ -72,11 +73,4 @@ export class ExcelPreviewComponent implements OnInit {
   }
 
   selectedFile: File | null = null;
-
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-    }
-  }
 }
